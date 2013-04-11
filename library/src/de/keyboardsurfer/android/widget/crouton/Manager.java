@@ -17,21 +17,21 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
+import java.util.Iterator;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.accessibility.AccessibilityEventCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
-import java.util.Iterator;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 
 /**
@@ -380,12 +380,7 @@ final class Manager extends Handler {
       // Prior to SDK 16, announcements could only be made through FOCUSED
       // events. Jelly Bean (SDK 16) added support for speaking text verbatim
       // using the ANNOUNCEMENT event type.
-      final int eventType;
-      if (Build.VERSION.SDK_INT < 16) {
-        eventType = AccessibilityEvent.TYPE_VIEW_FOCUSED;
-      } else {
-        eventType = AccessibilityEventCompat.TYPE_ANNOUNCEMENT;
-      }
+      final int eventType = AccessibilityEvent.TYPE_VIEW_FOCUSED;
 
       // Construct an accessibility event with the minimum recommended
       // attributes. An event without a class name or package may be dropped.
